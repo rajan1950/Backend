@@ -6,4 +6,5 @@ router.get('/states/:id', stateController.getStateById)
 router.post('/states', stateController.createState)
 router.delete('/states/:id', stateController.deleteState)
 
+
 module.exports = router
