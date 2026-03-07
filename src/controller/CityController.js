@@ -44,39 +44,9 @@ const deleteCity = async (req, res) => {
     }
 }
 
-// PUT /cities/:id/color        => add a color   (req.body.color)
-const addColor = async (req, res) => {
-    const updatedCity = await citySchema.findByIdAndUpdate(
-        req.params.id,
-        { $push: { colors: req.body.color } },
-        { new: true }
-    )
-    if (updatedCity) {
-        res.status(200).json({ message: 'color added', data: updatedCity })
-    } else {
-        res.status(404).json({ message: 'city not found' })
-    }
-}
-
-// PUT /cities/:id/color/remove  => remove a color (req.body.color)
-const removeColor = async (req, res) => {
-    const updatedCity = await citySchema.findByIdAndUpdate(
-        req.params.id,
-        { $pull: { colors: req.body.color } },
-        { new: true }
-    )
-    if (updatedCity) {
-        res.status(200).json({ message: 'color removed', data: updatedCity })
-    } else {
-        res.status(404).json({ message: 'city not found' })
-    }
-}
-
 module.exports = {
     getAllCities,
     getCityById,
     createCity,
-    deleteCity,
-    addColor,
-    removeColor
+    deleteCity
 }

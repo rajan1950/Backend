@@ -44,41 +44,11 @@ const deleteState = async (req, res) => {
     }
 }
 
-// PUT /states/:id/color        => add a color   (req.body.color)
-const addColor = async (req, res) => {
-    const updatedState = await stateSchema.findByIdAndUpdate(
-        req.params.id,
-        { $push: { colors: req.body.color } },
-        { new: true }
-    )
-    if (updatedState) {
-        res.status(200).json({ message: 'color added', data: updatedState })
-    } else {
-        res.status(404).json({ message: 'state not found' })
-    }
-}
-
-// PUT /states/:id/color/remove  => remove a color (req.body.color)
-const removeColor = async (req, res) => {
-    const updatedState = await stateSchema.findByIdAndUpdate(
-        req.params.id,
-        { $pull: { colors: req.body.color } },
-        { new: true }
-    )
-    if (updatedState) {
-        res.status(200).json({ message: 'color removed', data: updatedState })
-    } else {
-        res.status(404).json({ message: 'state not found' })
-    }
-}
-
 module.exports = {
     getAllStates,
     getStateById,
     createState,
-    deleteState,
-    addColor,
-    removeColor
+    deleteState
 }
 
 

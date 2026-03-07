@@ -44,39 +44,9 @@ const deleteCategory = async (req, res) => {
     }
 }
 
-// PUT /categories/:id/color        => add a color   (req.body.color)
-const addColor = async (req, res) => {
-    const updatedCategory = await categorySchema.findByIdAndUpdate(
-        req.params.id,
-        { $push: { colors: req.body.color } },
-        { new: true }
-    )
-    if (updatedCategory) {
-        res.status(200).json({ message: 'color added', data: updatedCategory })
-    } else {
-        res.status(404).json({ message: 'category not found' })
-    }
-}
-
-// PUT /categories/:id/color/remove  => remove a color (req.body.color)
-const removeColor = async (req, res) => {
-    const updatedCategory = await categorySchema.findByIdAndUpdate(
-        req.params.id,
-        { $pull: { colors: req.body.color } },
-        { new: true }
-    )
-    if (updatedCategory) {
-        res.status(200).json({ message: 'color removed', data: updatedCategory })
-    } else {
-        res.status(404).json({ message: 'category not found' })
-    }
-}
-
 module.exports = {
     getAllCategories,
     getCategoryById,
     createCategory,
-    deleteCategory,
-    addColor,
-    removeColor
+    deleteCategory
 }

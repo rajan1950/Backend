@@ -13,10 +13,6 @@ const citySchema = new Schema({
     country: {
         type: String,
         required: true
-    },
-    colors: {
-        type: [String],
-        default: []
     }
 })
 

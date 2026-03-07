@@ -18,10 +18,6 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
-    colors: {
-        type: [String],
-        default: []
-    },
     
 })
 

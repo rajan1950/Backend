@@ -44,39 +44,9 @@ const deleteBook = async (req, res) => {
     }
 }
 
-// PUT /books/:id/color        => add a color   (req.body.color)
-const addColor = async (req, res) => {
-    const updatedBook = await bookSchema.findByIdAndUpdate(
-        req.params.id,
-        { $push: { colors: req.body.color } },
-        { new: true }
-    )
-    if (updatedBook) {
-        res.status(200).json({ message: 'color added', data: updatedBook })
-    } else {
-        res.status(404).json({ message: 'book not found' })
-    }
-}
-
-// PUT /books/:id/color/remove  => remove a color (req.body.color)
-const removeColor = async (req, res) => {
-    const updatedBook = await bookSchema.findByIdAndUpdate(
-        req.params.id,
-        { $pull: { colors: req.body.color } },
-        { new: true }
-    )
-    if (updatedBook) {
-        res.status(200).json({ message: 'color removed', data: updatedBook })
-    } else {
-        res.status(404).json({ message: 'book not found' })
-    }
-}
-
 module.exports = {
     getAllBooks,
     getBookById,
     createBook,
-    deleteBook,
-    addColor,
-    removeColor
+    deleteBook
 }

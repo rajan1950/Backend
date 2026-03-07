@@ -28,10 +28,6 @@ const userSchema = new Schema({
         type: Number,
         required: true
     },
-    colors: {
-        type: [String],
-        default: []
-    },
 
 })
 
