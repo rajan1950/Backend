@@ -4,56 +4,62 @@ const productSchema = require("../models/ProductModel");
 
 //api
 const getAllProducts = async (req, res) => {
-  //db query
-  const allProducts = await productSchema.find();
-  res.json({
-    message: "all products",
-    data: allProducts,
-  });
+  try {
+    const allProducts = await productSchema.find();
+    res.json({
+      message: "all products",
+      data: allProducts,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
+
 const getProductById = async (req, res) => {
-  //req.params.id
-  //const foundProduct = await productSchema.find({_id:req.params.id}) //[]
-  const foundProduct = await productSchema.findById(req.params.id); //{}
-  if (foundProduct) {
-    res.json({
-      message: "product found",
-      data: foundProduct,
-    });
-  } else {
-    res.json({
-      message: "product not found",
-    });
+  try {
+    const foundProduct = await productSchema.findById(req.params.id);
+    if (foundProduct) {
+      res.json({
+        message: "product found",
+        data: foundProduct,
+      });
+    } else {
+      res.status(404).json({
+        message: "product not found",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
 const addProduct = async (req, res) => {
-  //console.log("body...",req.body)
-  const savedProduct = await productSchema.create(req.body);
-  res.status(201).json({
-    message: "product saved",
-    data: savedProduct,
-  });
+  try {
+    const savedProduct = await productSchema.create(req.body);
+    res.status(201).json({
+      message: "product saved",
+      data: savedProduct,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 const deleteProduct = async (req, res) => {
-  //delete from products where id = ?
-  //db.products.removeOne({_id:?})
-  //productSchema.removeOne({_id:req.params.id})
-  //productSchema.findByIdAndDelete(req.params.id)
-
-  const deletedProductObj = await productSchema.findByIdAndDelete(
-    req.params.id,
-  );
-  if (deletedProductObj) {
-    res.status(200).json({
-      message: "product deleted",
-      data: deletedProductObj,
-    });
-  } else {
-    res.status(200).json({
-      message: "product not found to delete",
-    });
+  try {
+    const deletedProductObj = await productSchema.findByIdAndDelete(req.params.id);
+    if (deletedProductObj) {
+      res.status(200).json({
+        message: "product deleted",
+        data: deletedProductObj,
+      });
+    } else {
+      res.status(404).json({
+        message: "product not found to delete",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
