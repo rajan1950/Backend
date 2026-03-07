@@ -9,6 +9,10 @@ const stateSchema = new Schema({
     country: {
         type: String,
         required: true
+    },
+    colors: {
+        type: [String],
+        default: []
     }
 })
 
