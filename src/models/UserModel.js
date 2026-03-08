@@ -8,7 +8,6 @@ const userSchema = new Schema({
     },
     lastname: {
         type: String,
-        required: true
     },
     email: {
         type: String,
@@ -26,7 +25,6 @@ const userSchema = new Schema({
     },
     age: {
         type: Number,
-        required: true
     },
 
 })
