@@ -15,7 +15,10 @@ app.use("/emp",employeeRoutes);
 const userRoutes = require("./src/routes/UserRoutes");
 app.use("/user",userRoutes)
 
-//localhost:4000/emp/employees
+//localhost:4000/prod/products
+//http://localhost:4000/prod/products/search?name=iPhone
+//localhost:4000/prod/products/search?category=electronics
+//localhost:4000/prod/products/search?minPrice=500&maxPrice=90000
 const productRoutes = require("./src/routes/ProductRoute");
 app.use("/prod",productRoutes)
 
